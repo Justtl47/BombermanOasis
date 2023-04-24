@@ -37,7 +37,7 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
@@ -62,9 +62,9 @@ public class BombermanGame extends Application {
             }
         };
         timer.start();
-
+        scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
+        scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
         createMap();
-
 //        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
 //        entities.add(bomberman);
     }
