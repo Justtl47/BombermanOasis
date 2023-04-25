@@ -7,24 +7,30 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import uet.oop.bomberman.entities.Bomber;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
+import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class BombermanGame extends Application {
-    
+
     public static final int WIDTH = 20;
     public static final int HEIGHT = 15;
-    
+    public static Bomber bomberman;
+
     private GraphicsContext gc;
     private Canvas canvas;
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
+    public static List<Bomb> bombList;
+    public static List<Flame> flameList = new ArrayList<>();
+    public static int score = 0;
+    public static int time = 0;
+    public static int level = 1;
+    public static boolean nextLevel = false;
+
 
 
     public static void main(String[] args) {
@@ -33,6 +39,8 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        entities.add(bomberman);
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
@@ -51,16 +59,41 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                render();
-                update();
+                if(nextLevel) {
+                    resetLevel();
+                }
+
+                if(Bomber.revive) {
+                    entities.clear();
+                    bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+                    entities.add(bomberman);
+                    bombList = bomberman.getBombs();
+                }
+                try {
+                    render();
+                    update();
+                } catch (ConcurrentModificationException e) {
+                    // inevitable.
+                }
             }
         };
         timer.start();
-
+        scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
+        scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
         createMap();
+//        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+//        entities.add(bomberman);
+        bombList = bomberman.getBombs();
+    }
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+    public void resetLevel() {
+        stillObjects.clear();
+        entities.clear();
+        createMap();
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
+        bombList = bomberman.getBombs();
+        nextLevel = false;
     }
 
     public void createMap() {
@@ -80,11 +113,15 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+        bombList.forEach(Bomb::update);
+        for (Flame flame : flameList) flame.update();
     }
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         stillObjects.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
+        bombList.forEach(g -> g.render(gc));
+        flameList.forEach(g -> g.render(gc));
     }
 }
