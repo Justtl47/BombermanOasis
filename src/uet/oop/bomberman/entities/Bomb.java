@@ -26,12 +26,15 @@ public class Bomb extends Entity {
     @Override
     public void update() {
         bomberman.bombale = false;
-        time ++;
-        if (time ==  100) {
+        if (time++ ==  100) {
+            Flame flame = new Flame(x, y);
+            flame.setRadius(radius);
+            flame.renderExplode();
             bomberman.bombale = true;
             BombermanGame.bombList.remove(this);
         }
 
         img = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2,  time, 40).getFxImage();
     }
+
 }
