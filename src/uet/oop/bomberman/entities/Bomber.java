@@ -11,7 +11,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Bomber extends Entity {
+public class Bomber extends MoveableEntity {
+
+    public boolean bombable;
+    public boolean infibomb;
+
+    protected int radius;
+
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
 
     public Bomber(int x, int y, Image img) {
         super( x, y, img);
