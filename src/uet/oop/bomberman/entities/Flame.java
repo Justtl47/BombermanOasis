@@ -58,7 +58,9 @@ public class Flame extends Entity {
     }
 
     public void explode(){
-        Flame f = new Flame(x, y, Sprite.bomb_exploded.getFxImage(), 0);
+        Flame f = new Flame(x, y);
+        f.img = Sprite.bomb_exploded.getFxImage();
+        f.direction = 0;
         flameList.add(f);
         for(int i = 0; i < right; i++){
             Flame flame = new Flame(x + size*(i + 1), y);
