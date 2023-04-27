@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import GiaoDien.Map;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -16,15 +17,15 @@ import java.util.List;
 
 public class BombermanGame extends Application {
 
-    public static final int WIDTH = 20;
-    public static final int HEIGHT = 15;
+    public static int WIDTH ;
+    public static int HEIGHT;
     public static Bomber bomberman;
 
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
-    public static List<Bomb> bombList;
+    public static List<Entity> entities = new ArrayList<>();
+    public static List<Entity> stillObjects = new ArrayList<>();
+    public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
     public static int time = 0;
@@ -39,6 +40,7 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+        Map.createMap();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
         // Tao Canvas
@@ -80,35 +82,19 @@ public class BombermanGame extends Application {
         timer.start();
         scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
         scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
-        createMap();
-//        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-//        entities.add(bomberman);
+        //Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        //entities.add(bomberman);
         bombList = bomberman.getBombs();
     }
 
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();
-        createMap();
+        Map.createMap();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
         bombList = bomberman.getBombs();
         nextLevel = false;
-    }
-
-    public void createMap() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Entity object;
-                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-                    object = new Wall(i, j, Sprite.wall.getFxImage());
-                }
-                else {
-                    object = new Grass(i, j, Sprite.grass.getFxImage());
-                }
-                stillObjects.add(object);
-            }
-        }
     }
 
     public void update() {
@@ -119,9 +105,11 @@ public class BombermanGame extends Application {
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        stillObjects.forEach(g -> g.render(gc));
-        entities.forEach(g -> g.render(gc));
+        for(int i = stillObjects.size() - 1; i >= 0; i--) {
+            stillObjects.get(i).render(gc);
+        }
         bombList.forEach(g -> g.render(gc));
+        entities.forEach(g -> g.render(gc));
         flameList.forEach(g -> g.render(gc));
     }
 }

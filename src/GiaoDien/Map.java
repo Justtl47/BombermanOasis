@@ -15,13 +15,13 @@ import static uet.oop.bomberman.BombermanGame.stillObjects;
 public class Map {
 
     public static void createMap() {
-        try{
-            File file = new File("src/Levels/level" + BombermanGame.level + ".txt");
+        try {
+            File file = new File("res/levels/Level" + BombermanGame.level + ".txt");
             // tạo đối tượng để quét file txt
             Scanner scanner = new Scanner(file);
-            int height = scanner.nextInt();
+            int level = scanner.nextInt();
             // Tiếp tục đọc để bỏ qua chỉ số level
-            height = scanner.nextInt();
+            int height = scanner.nextInt();
             int width = scanner.nextInt();
             scanner.nextLine();
             Entity object;
@@ -35,19 +35,35 @@ public class Map {
                     //Tạo entity mới để dễ add vào map hơn
                     Entity entity;
                     if(line.charAt(j) == '#') {
-                        entity = new Grass(j, i, Sprite.wall.getFxImage());
+                        entity = new Wall(j, i, Sprite.wall.getFxImage());
+                        stillObjects.add(entity);
                     } else {
-                        entity = new Grass(j, i, Sprite.wall.getFxImage());
-                        switch (line.charAt(j)) {
-                            case '*':
-                                entity = new Brick(j, i, Sprite.brick.getFxImage());
-                                break;
+                        entity = new Grass(j, i, Sprite.grass.getFxImage());
+                        stillObjects.add(entity);
+                        switch(line.charAt(j)) {
                             case 'x':
                                 entity = new Portal(j, i, Sprite.portal.getFxImage());
+                                stillObjects.add(entity);
+                                //Đè brick lên portal
+                                entity = new Brick(j, i, Sprite.brick.getFxImage());
+                                stillObjects.add(entity);
+                                break;
+                            case '*':
+                                entity = new Brick(j, i, Sprite.brick.getFxImage());
+                                stillObjects.add(entity);
                                 break;
                         }
                     }
-                    stillObjects.add(entity);
+                }
+            }
+            //Sắo xếp entity theo layer của nó
+            for(int i = 0; i < stillObjects.size() - 1; i++) {
+                for(int j = i + 1; j < stillObjects.size(); j++){
+                    if(stillObjects.get(i).getLayer() < stillObjects.get(j).getLayer()) {
+                        Entity temp = stillObjects.get(i);
+                        stillObjects.set(i, stillObjects.get(j));
+                        stillObjects.set(j, temp);
+                    }
                 }
             }
         }
