@@ -9,8 +9,8 @@ import java.util.Random;
 public abstract class Enemy extends MoveableEntity {
 
     public boolean metBomb = false;
-    public Enemy(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Enemy(int x, int y, Image img) {
+        super(x, y, img);
         setLayer(1);
     }
 
