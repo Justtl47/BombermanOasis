@@ -24,6 +24,7 @@ public class BombermanGame extends Application {
 
     private GraphicsContext gc;
     private Canvas canvas;
+
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
     public static List<Enemy> enemies = new ArrayList<>();
@@ -81,6 +82,7 @@ public class BombermanGame extends Application {
                 }
             }
         };
+
         timer.start();
         scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
         scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
@@ -100,11 +102,12 @@ public class BombermanGame extends Application {
     }
 
     public void update() {
+        enemies.forEach(Enemy::update);
         stillObjects.forEach(Entity::update);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
-        enemies.forEach(Enemy::update);
         for (Flame flame : flameList) flame.update();
+        Collisions.enemyHandler();
     }
 
     public void render() {

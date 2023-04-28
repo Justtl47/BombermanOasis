@@ -56,9 +56,11 @@ public class Map {
                             case '1':
                                 Enemy enemy = new Balloom(j, i, Sprite.balloom_left1.getFxImage());
                                 enemies.add(enemy);
+                                break;
                             case '2':
                                 Enemy enemy1 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
                                 enemies.add(enemy1);
+                                break;
                         }
                     }
                 }

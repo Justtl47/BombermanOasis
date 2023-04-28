@@ -122,10 +122,18 @@ public class Oneal extends Enemy {
                     && Math.abs(this.getX() - BombermanGame.bomberman.getX()) < 100
                     && !metBomb) {
                 switch (targetDirection) {
-                    case 0: goLeft();
-                    case 1: goRight();
-                    case 2: goUp();
-                    case 3: goDown();
+                    case 0:
+                        goLeft();
+                        break;
+                    case 1:
+                        goRight();
+                        break;
+                    case 2:
+                        goUp();
+                        break;
+                    case 3:
+                        goDown();
+                        break;
                 }
             } else {
                 switch (randDirection) {

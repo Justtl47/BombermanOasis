@@ -7,8 +7,8 @@ import uet.oop.bomberman.graphics.Sprite;
 public class Balloom extends Enemy {
     int direction = randomDirection();
 
-    public Balloom(int xUnit, int yUnit, Image img) {
-        super(xUnit, yUnit, img);
+    public Balloom(int x, int y, Image img) {
+        super(x, y, img);
         setSpeed(1);
         setAlive(true);
     }
@@ -52,13 +52,27 @@ public class Balloom extends Enemy {
     public void update() {
         if (isAlive()) {
             switch (direction) {
-                case 0: this.goLeft();
-                case 1: this.goRight();
-                case 2: this.goUp();
-                case 3: this.goDown();
+                case 0:
+                    this.goLeft();
+                    break;
+                case 1:
+                    this.goRight();
+                    break;
+                case 2:
+                    this.goUp();
+                    break;
+                case 3:
+                    this.goDown();
+                    break;
             }
         } else {
             dead();
         }
+    }
+
+    @Override
+    public void stay() {
+        super.stay();
+        direction = randomDirection();
     }
 }
