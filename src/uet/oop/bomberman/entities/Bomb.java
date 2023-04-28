@@ -23,7 +23,7 @@ public class Bomb extends Entity {
 
     @Override
     public void update() {
-        BombermanGame.bomberman.bombable = false;
+        BombermanGame.bomberman.bombale = false;
         if (timeCount++ == 100) {
 
         }
