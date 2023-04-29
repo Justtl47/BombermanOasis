@@ -21,16 +21,19 @@ public class Flame extends Entity {
 
     public Flame(int x, int y) {
         super(x, y);
+        setLayer(1);
     }
 
     public Flame(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
         this.radius = 1;
+        setLayer(1);
     }
 
     public Flame(int xUnit, int yUnit, Image img, int direction) {
         super(xUnit, yUnit, img);
         this.direction = direction;
+        setLayer(1);
     }
 
     public int getRadius() {

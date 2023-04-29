@@ -1,11 +1,15 @@
 package uet.oop.bomberman;
 
+import GiaoDien.Bar;
+import GiaoDien.Map;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
@@ -14,17 +18,21 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import static javafx.scene.paint.Color.BLACK;
+
 public class BombermanGame extends Application {
 
-    public static final int WIDTH = 20;
-    public static final int HEIGHT = 15;
+    public static int WIDTH ;
+    public static int HEIGHT;
     public static Bomber bomberman;
 
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
-    public static List<Bomb> bombList;
+    public static AnchorPane board = new AnchorPane();
+    public static Bar bar = new Bar();
+    public static List<Entity> entities = new ArrayList<>();
+    public static List<Entity> stillObjects = new ArrayList<>();
+    public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
     public static int time = 0;
@@ -39,6 +47,9 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+        Map.createMap();
+        board.getChildren().addAll(new Rectangle(2,3));
+        bar.setBoard();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
         // Tao Canvas
@@ -47,12 +58,15 @@ public class BombermanGame extends Application {
 
         // Tao root container
         Group root = new Group();
+        canvas.setLayoutY(30);
         root.getChildren().add(canvas);
+        root.getChildren().add(board);
 
         // Tao scene
         Scene scene = new Scene(root);
-
+        scene.setFill(BLACK);
         // Them scene vao stage
+        stage.setTitle("Bomberman Game");
         stage.setScene(scene);
         stage.show();
 
@@ -80,38 +94,26 @@ public class BombermanGame extends Application {
         timer.start();
         scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
         scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
-        createMap();
-//        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-//        entities.add(bomberman);
+        //Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        //entities.add(bomberman);
         bombList = bomberman.getBombs();
     }
 
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();
-        createMap();
+        Map.createMap();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
         bombList = bomberman.getBombs();
         nextLevel = false;
     }
 
-    public void createMap() {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
-                Entity object;
-                if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
-                    object = new Wall(i, j, Sprite.wall.getFxImage());
-                }
-                else {
-                    object = new Grass(i, j, Sprite.grass.getFxImage());
-                }
-                stillObjects.add(object);
-            }
-        }
-    }
-
     public void update() {
+        bar.setLabelLevel(level);
+        bar.setLabelTime(time);
+        bar.setLabelRemain(2);
+        bar.setLabelScore(100);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
         for (Flame flame : flameList) flame.update();
@@ -119,9 +121,11 @@ public class BombermanGame extends Application {
 
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        stillObjects.forEach(g -> g.render(gc));
-        entities.forEach(g -> g.render(gc));
+        for(int i = stillObjects.size() - 1; i >= 0; i--) {
+            stillObjects.get(i).render(gc);
+        }
         bombList.forEach(g -> g.render(gc));
+        entities.forEach(g -> g.render(gc));
         flameList.forEach(g -> g.render(gc));
     }
 }
