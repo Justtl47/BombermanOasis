@@ -29,7 +29,7 @@ public class Bomber extends MoveableEntity {
 
     public Bomber(int x, int y, Image img) {
         super( x, y, img);
-        setLayer(1);
+        setLayer(1  );
         setSpeed(2);
         setRadius(1);
         bombale = true;

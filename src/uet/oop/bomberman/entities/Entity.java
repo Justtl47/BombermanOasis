@@ -45,14 +45,15 @@ public abstract class Entity {
         return x;
     }
 
+    public int getY() {
+        return y;
+    }
+
     public Entity(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getY() {
-        return y;
-    }
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity( int xUnit, int yUnit, Image img) {

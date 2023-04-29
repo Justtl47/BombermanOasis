@@ -32,6 +32,7 @@ public class BombermanGame extends Application {
     public static Bar bar = new Bar();
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
+    public static List<Enemy> enemies = new ArrayList<>();
     public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
@@ -65,7 +66,7 @@ public class BombermanGame extends Application {
         // Tao scene
         Scene scene = new Scene(root);
         scene.setFill(BLACK);
-        // Them scene vao stage
+        //  Them scene vao stage
         stage.setTitle("Bomberman Game");
         stage.setScene(scene);
         stage.show();
@@ -116,7 +117,12 @@ public class BombermanGame extends Application {
         bar.setLabelScore(100);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
+        stillObjects.forEach(Entity::update);
+//        for (Entity entity : stillObjects) entity.update();
         for (Flame flame : flameList) flame.update();
+        Collisions.collisionFlame();
+        Collisions.collisionsHandler();
+        Collisions.enemyHandler();
     }
 
     public void render() {
