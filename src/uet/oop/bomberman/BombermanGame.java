@@ -32,6 +32,7 @@ public class BombermanGame extends Application {
     public static Bar bar = new Bar();
     public static List<Entity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
+    public static List<Enemy> enemies = new ArrayList<>();
     public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
@@ -47,11 +48,11 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
-        Map.createMap();
         board.getChildren().addAll(new Rectangle(2,3));
         bar.setBoard();
         bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
         entities.add(bomberman);
+        Map.createMap();
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
@@ -114,9 +115,11 @@ public class BombermanGame extends Application {
         bar.setLabelTime(time);
         bar.setLabelRemain(2);
         bar.setLabelScore(100);
+        enemies.forEach(Enemy::update);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
         for (Flame flame : flameList) flame.update();
+        Collisions.enemyHandler();
     }
 
     public void render() {
@@ -125,6 +128,7 @@ public class BombermanGame extends Application {
             stillObjects.get(i).render(gc);
         }
         bombList.forEach(g -> g.render(gc));
+        enemies.forEach(g -> g.render(gc));
         entities.forEach(g -> g.render(gc));
         flameList.forEach(g -> g.render(gc));
     }

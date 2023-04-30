@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
+import static uet.oop.bomberman.BombermanGame.enemies;
 import static uet.oop.bomberman.BombermanGame.stillObjects;
 
 public class Map {
@@ -51,6 +52,14 @@ public class Map {
                             case '*':
                                 entity = new Brick(j, i, Sprite.brick.getFxImage());
                                 stillObjects.add(entity);
+                                break;
+                            case '1':
+                                Enemy enemy = new Balloom(j, i, Sprite.balloom_left1.getFxImage());
+                                enemies.add(enemy);
+                                break;
+                            case '2':
+                                Enemy enemy1 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
+                                enemies.add(enemy1);
                                 break;
                         }
                     }
