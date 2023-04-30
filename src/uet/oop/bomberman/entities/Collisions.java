@@ -1,7 +1,6 @@
 package uet.oop.bomberman.entities;
 
 import uet.oop.bomberman.BombermanGame;
-
 import java.awt.*;
 
 import static uet.oop.bomberman.BombermanGame.*;
@@ -49,6 +48,7 @@ public class Collisions {
 
         }
     }
+    
     public static void enemyHandler() {
         for(Enemy enemy : enemies) {
             Rectangle r1 = enemy.getBounds();
