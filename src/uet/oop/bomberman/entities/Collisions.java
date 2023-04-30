@@ -54,9 +54,9 @@ public class Collisions {
             Rectangle r1 = enemy.getBounds();
             for (Entity stillObject : stillObjects) {
                 Rectangle r2 = stillObject.getBounds();
-                if (stillObject instanceof Brick) {
-                    enemy.move();
-                } else if (r1.intersects(r2)) {
+//                if (stillObject instanceof Brick) {
+//                    enemy.move();
+                if (r1.intersects(r2)) {
                     if (enemy.getLayer() >= stillObject.getLayer()) {
                         enemy.move();
                     } else {
