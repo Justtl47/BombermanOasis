@@ -1,4 +1,4 @@
-package uet.oop.bomberman.graphics;
+package GiaoDien;
 
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.*;

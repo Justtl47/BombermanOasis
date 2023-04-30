@@ -8,7 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
-import uet.oop.bomberman.graphics.Map;
+import GiaoDien.Map;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
