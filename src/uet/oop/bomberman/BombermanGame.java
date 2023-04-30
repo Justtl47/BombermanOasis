@@ -66,7 +66,7 @@ public class BombermanGame extends Application {
         // Tao scene
         Scene scene = new Scene(root);
         scene.setFill(BLACK);
-        // Them scene vao stage
+        //  Them scene vao stage
         stage.setTitle("Bomberman Game");
         stage.setScene(scene);
         stage.show();
@@ -118,7 +118,11 @@ public class BombermanGame extends Application {
         enemies.forEach(Enemy::update);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
+        stillObjects.forEach(Entity::update);
+//        for (Entity entity : stillObjects) entity.update();
         for (Flame flame : flameList) flame.update();
+        Collisions.collisionFlame();
+        Collisions.collisionsHandler();
         Collisions.enemyHandler();
     }
 

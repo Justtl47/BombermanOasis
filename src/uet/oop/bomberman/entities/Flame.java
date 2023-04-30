@@ -9,13 +9,13 @@ import java.awt.*;
 import static uet.oop.bomberman.BombermanGame.flameList;
 
 public class Flame extends Entity {
-    private int left = 2;// khoang no phai
-    private int right = 2;//khoang no trai
-    private int top = 2;//khoang no tren
-    private int down = 2;//khoang no duoi
+    private int left;
+    private int right;
+    private int top;
+    private int down;
 
     private int radius;
-    private int direction   ;
+    private int direction;
     private int time = 0;
     private int size = Sprite.SCALED_SIZE;
 
@@ -57,6 +57,10 @@ public class Flame extends Entity {
     }
 
     public void renderExplode() {
+        rightOfFlame();
+        leftOfFlame();
+        topOfFlame();
+        downOfFlame();
         explode();
     }
 
@@ -118,6 +122,75 @@ public class Flame extends Entity {
     public Rectangle getBounds() {
         Rectangle bound = new Rectangle(x, y, Sprite.SCALED_SIZE * 3/4, Sprite.SCALED_SIZE * 3/4);
         return bound;
+    }
+
+    private static Object typeOfCollision (Rectangle rectangle) {
+        for (Entity entity : BombermanGame.stillObjects) {
+            Rectangle r = entity.getBounds();
+            if (rectangle.intersects(r)) return entity;
+        }
+
+        return rectangle;
+    }
+
+    private void rightOfFlame() {
+        for (int i=0; i<radius; i++) {
+            Rectangle rectangle = new Rectangle(x + size * (i + 1), y, size, size);
+            if (typeOfCollision(rectangle) instanceof Wall) {
+                right = i;
+                return;
+            }
+            else if (typeOfCollision(rectangle) instanceof Brick) {
+                right = i + 1;
+                return;
+            }
+            right = i + 1;
+        }
+    }
+
+    private void leftOfFlame() {
+        for (int i=0; i<radius; i++) {
+            Rectangle rectangle = new Rectangle(x - size * (i + 1), y, size, size);
+            if (typeOfCollision(rectangle) instanceof Wall) {
+                left = i;
+                return;
+            }
+            else if (typeOfCollision(rectangle) instanceof Brick) {
+                left = i + 1;
+                return;
+            }
+            left = i + 1;
+        }
+    }
+
+    private void topOfFlame() {
+        for (int i=0; i<radius; i++) {
+            Rectangle rectangle = new Rectangle(x, y - size * (i + 1), size, size);
+            if (typeOfCollision(rectangle) instanceof Wall) {
+                top = i;
+                return;
+            }
+            else if (typeOfCollision(rectangle) instanceof Brick) {
+                top = i + 1;
+                return;
+            }
+            top = i + 1;
+        }
+    }
+
+    private void downOfFlame() {
+        for (int i=0; i<radius; i++) {
+            Rectangle rectangle = new Rectangle(x, y + size * (i + 1), size, size);
+            if (typeOfCollision(rectangle) instanceof Wall) {
+                down = i;
+                return;
+            }
+            else if (typeOfCollision(rectangle) instanceof Brick) {
+                down = i + 1;
+                return;
+            }
+            down = i + 1;
+        }
     }
 
     private void getImg() {
