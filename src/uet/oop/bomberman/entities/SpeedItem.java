@@ -11,11 +11,10 @@ public class SpeedItem extends Item{
 
     @Override
     public void update() {
-        bomberman.setSpeed(bomberman.getSpeed() + 1);
     }
 
     @Override
     public void change() {
-
+        bomberman.setSpeed(bomberman.getSpeed() + 1);
     }
 }
