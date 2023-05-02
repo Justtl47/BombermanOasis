@@ -44,6 +44,8 @@ public class BombermanGame extends Application {
     public static Group root = new Group();
     public static Scene scene;
 
+    public static Stage stage1;
+
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
@@ -70,8 +72,9 @@ public class BombermanGame extends Application {
         scene = new Scene(root);
         scene.setFill(BLACK);
         //  Them scene vao stage
-        stage.setTitle("Bomberman Game");
-        stage.setScene(scene);
+        stage1 = stage;
+        stage1.setTitle("Bomberman Game");
+        stage1.setScene(scene);
 
         //Chơi nhạc nền
         Sound.MainMenu.play();
@@ -84,6 +87,7 @@ public class BombermanGame extends Application {
             @Override
             public void handle(long l) {
                 if(nextLevel) {
+                    level++;
                     resetLevel();
                 }
 
@@ -107,6 +111,16 @@ public class BombermanGame extends Application {
         bombList = bomberman.getBombs();
     }
 
+    public void setNextLevel() {
+        level ++;
+        stillObjects.clear();
+        entities.clear();
+        Map.createMap();
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        entities.add(bomberman);
+        bombList = bomberman.getBombs();
+        nextLevel = false;
+    }
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();

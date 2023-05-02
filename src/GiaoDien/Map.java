@@ -54,12 +54,34 @@ public class Map {
                                 stillObjects.add(entity);
                                 break;
                             case '1':
-                                Enemy enemy = new Balloom(j, i, Sprite.balloom_left1.getFxImage());
-                                enemies.add(enemy);
+                                Enemy enemy1 = new Balloom(j, i, Sprite.balloom_left1.getFxImage());
+                                enemies.add(enemy1);
                                 break;
                             case '2':
-                                Enemy enemy1 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
-                                enemies.add(enemy1);
+                                Enemy enemy2 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
+                                enemies.add(enemy2);
+                                break;
+                            case '3':
+                                Enemy enemy3 = new Doll(j, i, Sprite.doll_left1.getFxImage());
+                                enemies.add(enemy3);
+                                break;
+                            case '4':
+                                Enemy enemy4 = new Minvo(j, i, Sprite.minvo_left1.getFxImage());
+                                enemies.add(enemy4);
+                                break;
+                            case 'b':
+                                stillObjects.add(new BombItem(j, i, Sprite.powerup_speed.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            case 'f':
+                                stillObjects.add(new FlameItem(j, i, Sprite.powerup_flames.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            case 's':
+                                stillObjects.add(new SpeedItem(j, i, Sprite.powerup_speed.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            default:
                                 break;
                         }
                     }
