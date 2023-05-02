@@ -62,7 +62,7 @@ public class Map {
                                 enemies.add(enemy1);
                                 break;
                             case 'b':
-                                stillObjects.add(new BombItem(j, i, Sprite.powerup_speed.getFxImage()));
+                                stillObjects.add(new BombItem(j, i, Sprite.powerup_bombs.getFxImage()));
                                 stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
                                 break;
                             case 'f':
