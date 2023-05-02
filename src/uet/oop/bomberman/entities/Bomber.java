@@ -1,18 +1,13 @@
 package uet.oop.bomberman.entities;
 
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.GraphicsContext;
+import GiaoDien.Sound;
+import GiaoDien.Bar;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.graphics.Sprite;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +24,9 @@ public class Bomber extends MoveableEntity {
 
     public Bomber(int x, int y, Image img) {
         super( x, y, img);
-        setLayer(1);
-        setSpeed(2);
+        setLayer(1  );
+        setSpeed(1);
+
         setRadius(1);
         bombale = true;
         infibomb = false;
@@ -67,7 +63,6 @@ public class Bomber extends MoveableEntity {
             die++;
             bomberDie();
         }
-
     }
 
     public void handleKeyPressedEvent(KeyCode keyCode) {
@@ -102,10 +97,11 @@ public class Bomber extends MoveableEntity {
     }
 
     public void bomberDie() {
+        Sound.Die.play();
         BombermanGame.score -= 1;
         this.stay();
         if (die <= 60) {
-            img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, die, 20).getFxImage();
+            img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, die, 50).getFxImage();
         } else revive = true;
     }
 
@@ -138,7 +134,7 @@ public class Bomber extends MoveableEntity {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(desX + 2, desY + 5, Sprite.SCALED_SIZE - 10, Sprite.SCALED_SIZE * 3 / 4);
+        return new Rectangle(desX + 2, desY + 2, 30, 30);
     }
 
     public List<Bomb> getBombs() {

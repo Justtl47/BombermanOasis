@@ -1,6 +1,10 @@
 package uet.oop.bomberman;
 
+import GiaoDien.Sound;
+import GiaoDien.SoundPlay;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,20 +16,15 @@ import static uet.oop.bomberman.graphics.ExitMenu.showExitMenu;
 public class StartMenu {
     public static void createStartMenu(Stage stage) {
         //Đọc ảnh background và button
-        Image image1 = new Image("bg.jpg");
+        Image image1 = new Image("StartMenu/backViet.jpg");
         ImageView background = new ImageView(image1);
-        background.setScaleX(0.75);
-        background.setScaleY(0.75);
-        background.setX(-145);
-        background.setY(-100);
+        background.setScaleX(0.25);
+        background.setScaleY(0.25);
 
-
-        Image image2 = new Image("start_button.png");
+        Image image2 = new Image("StartMenu/buttonViet.png");
         ImageView button = new ImageView(image2);
-        button.setScaleX(0.45);
-        button.setScaleY(0.45);
-        button.setX(150);
-        button.setY(300);
+        button.setScaleX(0.35);
+        button.setScaleY(0.35);
 
         //Tạo root chứa 2 ảnh
         AnchorPane root = new AnchorPane();
@@ -35,14 +34,30 @@ public class StartMenu {
         Scene startScene = new Scene(root);
         Stage startStage = new Stage();
         startStage.setScene(startScene);
-        startStage.setHeight(550);
-        startStage.setWidth(855);
         startStage.setTitle("BOMBERMAN_GAME");
+
+        //_____________________________ALIGN___________________________________
+        // Lấy kích thước hình ảnh
+        double imageWidth = 1481 / 2;
+        double imageHeight = 877 / 2;
+
+        // Đặt kích thước mới cho cửa sổ
+        startStage.setWidth(imageWidth);
+        startStage.setHeight(imageHeight);
+
+        // Đặt vị trí mới cho hình ảnh và nút
+        background.setLayoutX(-1120);
+        background.setLayoutY(-690);
+        button.setLayoutX(100);
+        button.setLayoutY(265);
+
+        // Show start menu
         startStage.show();
 
         button.setOnMouseClicked(event -> {
-            button.setScaleX(0.35);
-            button.setScaleY(0.35);
+            Sound.MainMenu.stop();
+            Sound.BG.play();
+            Sound.BG.loop();
             startStage.close();
             stage.show();
         });
