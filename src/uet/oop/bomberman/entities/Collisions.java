@@ -12,7 +12,7 @@ public class Collisions {
             Rectangle rectangle = flame.getBounds();
             Rectangle rectangle1 = bomberman.getBounds();
 
-            if (rectangle.intersects(rectangle1)) bomberman.setAlive(false);
+            if (rectangle.intersects(rectangle1)) bomberman.    setAlive(false);
 
             for (Entity stillObject : stillObjects) {
                 Rectangle rectangle2 = stillObject.getBounds();
@@ -36,6 +36,9 @@ public class Collisions {
         for (Entity stillObject : stillObjects) {
             Rectangle rectangle1 = stillObject.getBounds();
             if (rectangle.intersects(rectangle1)) {
+                if (stillObject instanceof Portal && enemies.size() == 0) {
+                    nextLevel = true;
+                }
                 if (bomberman.getLayer() >= stillObject.getLayer()) {
                     bomberman.move();
                 }
@@ -43,7 +46,14 @@ public class Collisions {
                     bomberman.stay();
                 }
 
+                if (stillObject instanceof Item) {
+                    score += 50;
+                    ((Item) stillObject).change();
+                    stillObjects.remove(stillObject);
+                }
+
                 //item, portal
+                break;
             }
 
         }
@@ -54,9 +64,10 @@ public class Collisions {
             Rectangle r1 = enemy.getBounds();
             for (Entity stillObject : stillObjects) {
                 Rectangle r2 = stillObject.getBounds();
-                if (stillObject instanceof Brick) {
-                    enemy.move();
-                } else if (r1.intersects(r2)) {
+//                if (stillObject instanceof Brick) {
+//                    enemy.move();
+//                }
+                if (r1.intersects(r2)) {
                     if (enemy.getLayer() >= stillObject.getLayer()) {
                         enemy.move();
                     } else {

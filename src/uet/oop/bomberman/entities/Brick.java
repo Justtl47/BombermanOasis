@@ -8,7 +8,7 @@ public class Brick extends Entity {
 
     public Brick(int x, int y, Image img) {
         super(x, y, img);
-        setLayer(3);
+        setLayer(5);
         alive = true;
         time = 0;
     }
