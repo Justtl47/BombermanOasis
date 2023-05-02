@@ -84,6 +84,7 @@ public class BombermanGame extends Application {
             @Override
             public void handle(long l) {
                 if(nextLevel) {
+                    level++;
                     resetLevel();
                 }
 
@@ -107,6 +108,16 @@ public class BombermanGame extends Application {
         bombList = bomberman.getBombs();
     }
 
+    public void setNextLevel() {
+        level ++;
+        stillObjects.clear();
+        entities.clear();
+        Map.createMap();
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        entities.add(bomberman);
+        bombList = bomberman.getBombs();
+        nextLevel = false;
+    }
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();
