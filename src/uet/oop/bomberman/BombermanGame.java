@@ -19,6 +19,7 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import static javafx.scene.paint.Color.BLACK;
+import static uet.oop.bomberman.StartMenu.createStartMenu;
 
 public class BombermanGame extends Application {
 
@@ -37,10 +38,11 @@ public class BombermanGame extends Application {
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
     public static int time = 0;
-    public static int level = 0;
+    public static int level = 1;
     public static boolean nextLevel = false;
 
-
+    public static Group root = new Group();
+    public static Scene scene;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -58,23 +60,27 @@ public class BombermanGame extends Application {
         gc = canvas.getGraphicsContext2D();
 
         // Tao root container
-        Group root = new Group();
+        //Group root = new Group();
         canvas.setLayoutY(30);
         root.getChildren().add(canvas);
         root.getChildren().add(board);
 
         // Tao scene
-        Scene scene = new Scene(root);
+        //Scene scene = new Scene(root);
+        scene = new Scene(root);
         scene.setFill(BLACK);
         //  Them scene vao stage
         stage.setTitle("Bomberman Game");
         stage.setScene(scene);
-        stage.show();
+
+        //Tạo màn hình khởi động game
+        createStartMenu(stage);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 if(nextLevel) {
+                    level++;
                     resetLevel();
                 }
 
@@ -95,11 +101,19 @@ public class BombermanGame extends Application {
         timer.start();
         scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
         scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
-        //Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        //entities.add(bomberman);
         bombList = bomberman.getBombs();
     }
 
+    public void setNextLevel() {
+        level ++;
+        stillObjects.clear();
+        entities.clear();
+        Map.createMap();
+        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        entities.add(bomberman);
+        bombList = bomberman.getBombs();
+        nextLevel = false;
+    }
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();
