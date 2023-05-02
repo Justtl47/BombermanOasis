@@ -12,7 +12,7 @@ public class Oneal extends Enemy {
 
     public Oneal(int x, int y, Image img) {
         super(x, y, img);
-        setSpeed(2);
+        setSpeed(1);
         setAlive(true);
     }
 

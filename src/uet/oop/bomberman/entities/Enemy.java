@@ -15,7 +15,7 @@ public abstract class Enemy extends MoveableEntity {
     }
 
     public void dead() {
-
+        img = Sprite.movingSprite(Sprite.mob_dead1,Sprite.mob_dead2, Sprite.mob_dead3, deadTime++, 90).getFxImage();
     }
 
     @Override

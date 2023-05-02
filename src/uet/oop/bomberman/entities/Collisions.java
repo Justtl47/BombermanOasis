@@ -67,6 +67,7 @@ public class Collisions {
 //                if (stillObject instanceof Brick) {
 //                    enemy.move();
 //                }
+
                 if (r1.intersects(r2)) {
                     if (enemy.getLayer() >= stillObject.getLayer()) {
                         enemy.move();
