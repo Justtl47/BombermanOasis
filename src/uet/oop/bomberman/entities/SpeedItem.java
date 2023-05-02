@@ -7,6 +7,7 @@ import static uet.oop.bomberman.BombermanGame.bomberman;
 public class SpeedItem extends Item{
     public SpeedItem(int xUnit, int yUnit, Image img) {
         super(xUnit, yUnit, img);
+        setLayer(1);
     }
 
     @Override
