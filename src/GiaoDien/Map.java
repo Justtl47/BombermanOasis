@@ -64,6 +64,7 @@ public class Map {
                             case '3':
                                 Enemy enemy3 = new Doll(j, i, Sprite.doll_left1.getFxImage());
                                 enemies.add(enemy3);
+                                break;
                             case '4':
                                 Enemy enemy4 = new Minvo(j, i, Sprite.minvo_left1.getFxImage());
                                 enemies.add(enemy4);
