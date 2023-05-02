@@ -61,6 +61,20 @@ public class Map {
                                 Enemy enemy1 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
                                 enemies.add(enemy1);
                                 break;
+                            case 'b':
+                                stillObjects.add(new BombItem(j, i, Sprite.powerup_speed.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            case 'f':
+                                stillObjects.add(new FlameItem(j, i, Sprite.powerup_flames.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            case 's':
+                                stillObjects.add(new SpeedItem(j, i, Sprite.powerup_speed.getFxImage()));
+                                stillObjects.add(new Brick(j, i, Sprite.brick.getFxImage()));
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
