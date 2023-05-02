@@ -1,6 +1,10 @@
 package uet.oop.bomberman.entities;
 
+import javafx.stage.Stage;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.StartMenu;
+import uet.oop.bomberman.graphics.ExitMenu;
+
 import java.awt.*;
 
 import static uet.oop.bomberman.BombermanGame.*;
@@ -12,7 +16,10 @@ public class Collisions {
             Rectangle rectangle = flame.getBounds();
             Rectangle rectangle1 = bomberman.getBounds();
 
-            if (rectangle.intersects(rectangle1)) bomberman.    setAlive(false);
+            if (rectangle.intersects(rectangle1)) {
+                bomberman.setAlive(false);
+                ExitMenu.showExitMenu(BombermanGame.stage1);
+            }
 
             for (Entity stillObject : stillObjects) {
                 Rectangle rectangle2 = stillObject.getBounds();
@@ -89,6 +96,7 @@ public class Collisions {
             Rectangle r4 = bomberman.getBounds();
             if (r1.intersects(r4) && enemy.isAlive()) {
                 bomberman.setAlive(false);
+                ExitMenu.showExitMenu(stage1);
             }
         }
     }

@@ -44,6 +44,8 @@ public class BombermanGame extends Application {
     public static Group root = new Group();
     public static Scene scene;
 
+    public static Stage stage1;
+
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
@@ -70,11 +72,12 @@ public class BombermanGame extends Application {
         scene = new Scene(root);
         scene.setFill(BLACK);
         //  Them scene vao stage
-        stage.setTitle("Bomberman Game");
-        stage.setScene(scene);
+        stage1 = stage;
+        stage1.setTitle("Bomberman Game");
+        stage1.setScene(scene);
 
         //Tạo màn hình khởi động game
-        createStartMenu(stage);
+        createStartMenu(stage1);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override

@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import static uet.oop.bomberman.graphics.ExitMenu.showExitMenu;
+
 
 public class StartMenu {
     public static void createStartMenu(Stage stage) {
