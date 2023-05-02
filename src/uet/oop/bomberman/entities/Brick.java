@@ -23,7 +23,6 @@ public class Brick extends Entity {
             }
             else {
                 BombermanGame.stillObjects.remove(this);
-                System.out.println("ok");
             }
         }
 

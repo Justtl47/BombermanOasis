@@ -2,8 +2,10 @@ package uet.oop.bomberman;
 
 import GiaoDien.Bar;
 import GiaoDien.Map;
+import GiaoDien.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import GiaoDien.Sound;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -26,7 +28,6 @@ public class BombermanGame extends Application {
     public static int WIDTH ;
     public static int HEIGHT;
     public static Bomber bomberman;
-
     private GraphicsContext gc;
     private Canvas canvas;
     public static AnchorPane board = new AnchorPane();
@@ -36,11 +37,10 @@ public class BombermanGame extends Application {
     public static List<Enemy> enemies = new ArrayList<>();
     public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
-    public static int score = 0;
+    public static int score = 100;
     public static int time = 0;
     public static int level = 1;
     public static boolean nextLevel = false;
-
     public static Group root = new Group();
     public static Scene scene;
 
@@ -73,8 +73,12 @@ public class BombermanGame extends Application {
         stage.setTitle("Bomberman Game");
         stage.setScene(scene);
 
+        //Chơi nhạc nền
+        Sound.MainMenu.play();
+
         //Tạo màn hình khởi động game
         createStartMenu(stage);
+        //createExitMenu(stage);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -115,9 +119,10 @@ public class BombermanGame extends Application {
 
     public void update() {
         bar.setLabelLevel(level);
-        bar.setLabelTime(time);
-        bar.setLabelRemain(2);
-        bar.setLabelScore(100);
+        bar.setLabelTime(time / 120);
+        bar.setLabelRemain(enemies.size());
+        bar.setLabelScore(score);
+        time++;
         enemies.forEach(Enemy::update);
         entities.forEach(Entity::update);
         bombList.forEach(Bomb::update);
