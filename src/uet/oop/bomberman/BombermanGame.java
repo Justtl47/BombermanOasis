@@ -37,7 +37,7 @@ public class BombermanGame extends Application {
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 0;
     public static int time = 0;
-    public static int level = 1;
+    public static int level = 0;
     public static boolean nextLevel = false;
 
 

@@ -61,6 +61,14 @@ public class Map {
                                 Enemy enemy1 = new Oneal(j, i, Sprite.oneal_left1.getFxImage());
                                 enemies.add(enemy1);
                                 break;
+                            case '3':
+                                Enemy enemy2 = new Doll(j, i, Sprite.doll_left1.getFxImage());
+                                enemies.add(enemy2);
+                                break;
+                            case '4':
+                                Enemy enemy3 = new Minvo(j, i, Sprite.minvo_left1.getFxImage());
+                                enemies.add(enemy3);
+                                break;
                         }
                     }
                 }
