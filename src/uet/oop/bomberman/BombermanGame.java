@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.graphics.ExitMenu;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import static javafx.scene.paint.Color.BLACK;
 import static uet.oop.bomberman.StartMenu.createStartMenu;
+import static uet.oop.bomberman.entities.Collisions.life;
 
 public class BombermanGame extends Application {
 
@@ -45,6 +47,8 @@ public class BombermanGame extends Application {
     public static Scene scene;
 
     public static Stage stage1;
+    public static List<Enemy> eList = new ArrayList<>();
+    public static int flag = 1;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -86,6 +90,12 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                if (life <= 0) {
+                    if (flag == 1) {
+                        flag--;
+                        ExitMenu.showExitMenu(stage1);
+                    }
+                }
                 if(nextLevel) {
                     level++;
                     resetLevel();
@@ -93,6 +103,12 @@ public class BombermanGame extends Application {
 
                 if(Bomber.revive) {
                     entities.clear();
+                    if (eList.size() != 0) {
+                        Enemy e = eList.get(0);
+                        eList.remove(0);
+                        e.setAlive(true);
+                        enemies.add(e);
+                    }
                     bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
                     entities.add(bomberman);
                     bombList = bomberman.getBombs();

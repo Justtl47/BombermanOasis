@@ -11,15 +11,20 @@ import static uet.oop.bomberman.BombermanGame.*;
 import static uet.oop.bomberman.BombermanGame.bomberman;
 
 public class Collisions {
+    public static int life = 60;
     public static void collisionFlame() {
         for (Flame flame : flameList) {
             Rectangle rectangle = flame.getBounds();
             Rectangle rectangle1 = bomberman.getBounds();
 
             if (rectangle.intersects(rectangle1)) {
+                life--;
+                System.out.println(life);
                 bomberman.setAlive(false);
-                ExitMenu.showExitMenu(BombermanGame.stage1);
+                break;
+//                ExitMenu.showExitMenu(BombermanGame.stage1);
             }
+
 
             for (Entity stillObject : stillObjects) {
                 Rectangle rectangle2 = stillObject.getBounds();
@@ -96,7 +101,12 @@ public class Collisions {
             Rectangle r4 = bomberman.getBounds();
             if (r1.intersects(r4) && enemy.isAlive()) {
                 bomberman.setAlive(false);
-                ExitMenu.showExitMenu(stage1);
+                life -= 20;
+                System.out.println(life);
+                eList.add(enemy);
+                enemy.setAlive(false);
+//                ExitMenu.showExitMenu(stage1);
+                break;
             }
         }
     }
