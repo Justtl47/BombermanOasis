@@ -23,8 +23,8 @@ public class Bomber extends MoveableEntity {
     boolean infibomb;
 
     public Bomber(int x, int y, Image img) {
-        super( x, y, img);
-        setLayer(1  );
+        super( x,  y, img);
+        setLayer(1);
         setSpeed(1);
 
         setRadius(1);
@@ -134,7 +134,7 @@ public class Bomber extends MoveableEntity {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(desX + 2, desY + 2, 30, 30);
+        return new Rectangle(desX + 2, desY + 2, 21, 21);
     }
 
     public List<Bomb> getBombs() {
