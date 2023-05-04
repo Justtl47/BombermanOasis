@@ -41,7 +41,7 @@ public class BombermanGame extends Application {
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 100;
     public static int time = 0;
-    public static int level = 1;
+    public static int level = 0;
     public static boolean nextLevel = false;
     public static Group root = new Group();
     public static Scene scene;
@@ -148,6 +148,7 @@ public class BombermanGame extends Application {
     }
 
     public void update() {
+        score = Math.max(score, 0);
         bar.setLabelLevel(level);
         bar.setLabelTime(time / 120);
         bar.setLabelRemain(enemies.size());

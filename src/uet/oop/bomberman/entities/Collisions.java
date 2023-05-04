@@ -11,7 +11,7 @@ import static uet.oop.bomberman.BombermanGame.*;
 import static uet.oop.bomberman.BombermanGame.bomberman;
 
 public class Collisions {
-    public static int life = 60;
+    public static int life = 60 ;
     public static void collisionFlame() {
         for (Flame flame : flameList) {
             Rectangle rectangle = flame.getBounds();
@@ -19,7 +19,7 @@ public class Collisions {
 
             if (rectangle.intersects(rectangle1)) {
                 life--;
-                System.out.println(life);
+//                System.out.println(life);
                 bomberman.setAlive(false);
                 break;
 //                ExitMenu.showExitMenu(BombermanGame.stage1);
@@ -35,8 +35,9 @@ public class Collisions {
 
             for (Enemy enemy : enemies) {
                 Rectangle rectangle3 = enemy.getBounds();
-                if (rectangle.intersects(rectangle3)) {
-                    score += 5;
+                if (rectangle.intersects(rectangle3) && bomberman.alive) {
+                    score += 5; // x20 = 100
+                    System.out.println("enemy : " + score);
                     enemy.setAlive(false);
                 }
             }
@@ -49,6 +50,8 @@ public class Collisions {
             Rectangle rectangle1 = stillObject.getBounds();
             if (rectangle.intersects(rectangle1)) {
                 if (stillObject instanceof Portal && enemies.size() == 0) {
+                    score += 200;
+                    System.out.println("portal : " + score);
                     nextLevel = true;
                 }
                 if (bomberman.getLayer() >= stillObject.getLayer()) {
@@ -59,7 +62,8 @@ public class Collisions {
                 }
 
                 if (stillObject instanceof Item) {
-                    score += 50;
+                    score += 20; // x1 = 20
+                    System.out.println("item : " + score);
                     ((Item) stillObject).change();
                     stillObjects.remove(stillObject);
                 }
