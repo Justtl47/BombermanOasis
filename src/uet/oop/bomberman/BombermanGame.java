@@ -41,12 +41,13 @@ public class BombermanGame extends Application {
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 100;
     public static int time = 0;
-    public static int level = 1;
+    public static int level = 0;
     public static boolean nextLevel = false;
     public static Group root = new Group();
     public static Scene scene;
 
     public static Stage stage1;
+    public static Stage stage2;
     public static List<Enemy> eList = new ArrayList<>();
     public static int flag = 1;
 
@@ -76,6 +77,7 @@ public class BombermanGame extends Application {
         scene = new Scene(root);
         scene.setFill(BLACK);
         //  Them scene vao stage
+        stage2 = stage;
         stage1 = stage;
         stage1.setTitle("Bomberman Game");
         stage1.setScene(scene);
@@ -127,17 +129,7 @@ public class BombermanGame extends Application {
         bombList = bomberman.getBombs();
     }
 
-    public void setNextLevel() {
-        level ++;
-        stillObjects.clear();
-        entities.clear();
-        Map.createMap();
-        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        entities.add(bomberman);
-        bombList = bomberman.getBombs();
-        nextLevel = false;
-    }
-    public void resetLevel() {
+    public static void resetLevel() {
         stillObjects.clear();
         entities.clear();
         Map.createMap();
@@ -147,7 +139,7 @@ public class BombermanGame extends Application {
         nextLevel = false;
     }
 
-    public void update() {
+    public static void update() {
         bar.setLabelLevel(level);
         bar.setLabelTime(time / 120);
         bar.setLabelRemain(enemies.size());
