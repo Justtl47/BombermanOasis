@@ -142,13 +142,14 @@ public class BombermanGame extends Application {
         nextLevel = false;
     }
 
-    public static void update() {
+    public void update() {
         if (restartGame) {
             level = 0;
             resetLevel();
             restartGame = false;
         }
-
+        
+        score = Math.max(score, 0);
         bar.setLabelLevel(level);
         bar.setLabelTime(time / 120);
         bar.setLabelRemain(enemies.size());

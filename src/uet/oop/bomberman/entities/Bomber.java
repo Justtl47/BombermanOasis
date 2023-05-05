@@ -98,7 +98,7 @@ public class Bomber extends MoveableEntity {
 
     public void bomberDie() {
         Sound.Die.play();
-        BombermanGame.score -= 1;
+//        BombermanGame.score -= 1;
         this.stay();
         if (die <= 60) {
             img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, die, 50).getFxImage();
