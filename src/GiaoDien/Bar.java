@@ -40,7 +40,6 @@ public class Bar extends AnchorPane {
 
     public void setBoard() {
         BombermanGame.board.getChildren().addAll(labelTime, labelLevel, labelScore, labelRemain);
-
     }
     public void setLabelTime(int time) {
         labelTime.setText("Time: " + time);

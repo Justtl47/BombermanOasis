@@ -1,27 +1,22 @@
 package uet.oop.bomberman;
 
 import GiaoDien.Sound;
-import GiaoDien.SoundPlay;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-import static uet.oop.bomberman.graphics.ExitMenu.showExitMenu;
-
 
 public class StartMenu {
     public static void createStartMenu(Stage stage) {
         //Đọc ảnh background và button
-        Image image1 = new Image("StartMenu/backViet.jpg");
+        Image image1 = new Image("Menu/backViet.jpg");
         ImageView background = new ImageView(image1);
         background.setScaleX(0.25);
         background.setScaleY(0.25);
 
-        Image image2 = new Image("StartMenu/buttonViet.png");
+        Image image2 = new Image("Menu/buttonViet.png");
         ImageView button = new ImageView(image2);
         button.setScaleX(0.35);
         button.setScaleY(0.35);

@@ -1,10 +1,5 @@
 package uet.oop.bomberman.entities;
 
-import javafx.stage.Stage;
-import uet.oop.bomberman.BombermanGame;
-import uet.oop.bomberman.StartMenu;
-import uet.oop.bomberman.graphics.ExitMenu;
-
 import java.awt.*;
 
 import static uet.oop.bomberman.BombermanGame.*;

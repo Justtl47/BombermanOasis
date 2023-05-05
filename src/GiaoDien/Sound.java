@@ -7,4 +7,5 @@ public class Sound {
     public static SoundPlay Eat = new SoundPlay("res/AmThanh/EatItem.wav");
     public static SoundPlay EnemyEat = new SoundPlay("res/AmThanh/EnemyEat.wav");
     public static SoundPlay Die = new SoundPlay("res/AmThanh/Die.wav");
+    public static SoundPlay GameOver = new SoundPlay("res/AmThanh/GameOver.wav");
 }

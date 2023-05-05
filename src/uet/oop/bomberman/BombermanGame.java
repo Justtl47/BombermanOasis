@@ -5,7 +5,6 @@ import GiaoDien.Map;
 import GiaoDien.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import GiaoDien.Sound;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -14,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
-import uet.oop.bomberman.graphics.ExitMenu;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.util.ArrayList;
@@ -127,16 +125,6 @@ public class BombermanGame extends Application {
         bombList = bomberman.getBombs();
     }
 
-    public void setNextLevel() {
-        level ++;
-        stillObjects.clear();
-        entities.clear();
-        Map.createMap();
-        bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        entities.add(bomberman);
-        bombList = bomberman.getBombs();
-        nextLevel = false;
-    }
     public void resetLevel() {
         stillObjects.clear();
         entities.clear();
