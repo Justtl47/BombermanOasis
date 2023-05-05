@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Bomb;
@@ -20,7 +23,9 @@ import static uet.oop.bomberman.BombermanGame.*;
 public class ExitMenu {
     public static void showExitMenu(Stage stage) {
         stage.close();
-        Label scoreL = new Label("Score: " + BombermanGame.score);
+
+        Label scoreL = new Label("Your Score: " + BombermanGame.score);
+
         Image image1 = new Image("StartMenu/backViet.jpg");
         ImageView background = new ImageView(image1);
 
@@ -29,6 +34,11 @@ public class ExitMenu {
 
         Image image3 = new Image("StartMenu/ResizeExitButton.png");
         ImageView exit = new ImageView(image3);
+
+        scoreL.setTextFill(Color.WHITE);
+        scoreL.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        scoreL.setLayoutX(270);
+        scoreL.setLayoutY(240);
 
         restart.setScaleX(0.35);
         restart.setScaleY(0.35);
