@@ -50,6 +50,7 @@ public class BombermanGame extends Application {
     public static Stage stage2;
     public static List<Enemy> eList = new ArrayList<>();
     public static int flag = 1;
+    public static boolean restartGame = false;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
@@ -127,6 +128,8 @@ public class BombermanGame extends Application {
         scene.setOnKeyPressed(event -> bomberman.handleKeyPressedEvent(event.getCode()));
         scene.setOnKeyReleased(event -> bomberman.handleKeyReleasedEvent(event.getCode()));
         bombList = bomberman.getBombs();
+
+
     }
 
     public static void resetLevel() {
@@ -140,6 +143,12 @@ public class BombermanGame extends Application {
     }
 
     public static void update() {
+        if (restartGame) {
+            level = 0;
+            resetLevel();
+            restartGame = false;
+        }
+
         bar.setLabelLevel(level);
         bar.setLabelTime(time / 120);
         bar.setLabelRemain(enemies.size());

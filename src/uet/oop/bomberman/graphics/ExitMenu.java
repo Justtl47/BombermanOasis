@@ -1,5 +1,6 @@
 package uet.oop.bomberman.graphics;
 
+import GiaoDien.Map;
 import GiaoDien.Sound;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -77,7 +78,17 @@ public class ExitMenu {
             Sound.BG.play();
             Sound.BG.loop();
             startStage.close();
+//            BombermanGame.resetLevel();
+            stage.show();
+            entities.clear();
+            enemies.clear();
+            level = 0;
+//            Map.createMap();
+            flag = 1;
+            Collisions.life = 60;
+            restartGame = true;
         });
+
 
         exit.setOnMouseClicked(event -> {
             startStage.close();
