@@ -144,7 +144,10 @@ public class BombermanGame extends Application {
 
     public void update() {
         if (restartGame) {
+            flag = 1;
             level = 0;
+            score = 100;
+            time = 0;
             resetLevel();
             restartGame = false;
         }

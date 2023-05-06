@@ -134,7 +134,7 @@ public class Bomber extends MoveableEntity {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(desX + 2, desY + 2, 21, 21);
+        return new Rectangle(desX + 2, desY + 2, Sprite.SCALED_SIZE * 2/3 - 1, Sprite.SCALED_SIZE * 2/3 - 1);
     }
 
     public List<Bomb> getBombs() {

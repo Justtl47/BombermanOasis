@@ -82,10 +82,8 @@ public class ExitMenu {
             stage.show();
             entities.clear();
             enemies.clear();
-            level = 0;
 //            Map.createMap();
-            flag = 1;
-            Collisions.life = 60;
+            Collisions.life = 3;
             restartGame = true;
         });
 
