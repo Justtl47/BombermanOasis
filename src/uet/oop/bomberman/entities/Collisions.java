@@ -39,7 +39,6 @@ public class Collisions {
                 Rectangle rectangle3 = enemy.getBounds();
                 if (rectangle.intersects(rectangle3) && bomberman.alive) {
                     score += 1;
-                    System.out.println("enemy : " + score);
                     enemy.setAlive(false);
                 }
             }
@@ -53,7 +52,6 @@ public class Collisions {
             if (rectangle.intersects(rectangle1)) {
                 if (stillObject instanceof Portal && enemies.size() == 0) {
                     score += 40;
-                    System.out.println("portal : " + score);
                     nextLevel = true;
                 }
                 if (bomberman.getLayer() >= stillObject.getLayer()) {
@@ -66,7 +64,6 @@ public class Collisions {
                 if (stillObject instanceof Item) {
                     Sound.EatItem.play();
                     score += 20; // x1 = 20
-                    System.out.println("item : " + score);
                     ((Item) stillObject).change();
                     stillObjects.remove(stillObject);
                 }
@@ -108,7 +105,6 @@ public class Collisions {
                 bomberman.setAlive(false);
                 life -= 20;
                 score -= 20;
-                System.out.println(life);
                 eList.add(enemy);
                 enemy.setAlive(false);
 //                ExitMenu.showExitMenu(stage1);

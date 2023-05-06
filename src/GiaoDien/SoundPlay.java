@@ -16,7 +16,7 @@ public class SoundPlay extends JFrame {
             clip.open(audioIn);
             // Lower audio
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-15.0f);
+            gainControl.setValue(-15f);
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }

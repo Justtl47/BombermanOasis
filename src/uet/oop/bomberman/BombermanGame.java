@@ -89,7 +89,6 @@ public class BombermanGame extends Application {
 
         //Tạo màn hình khởi động game
         createStartMenu(stage);
-        //createExitMenu(stage);
 
         AnimationTimer timer = new AnimationTimer() {
             @Override

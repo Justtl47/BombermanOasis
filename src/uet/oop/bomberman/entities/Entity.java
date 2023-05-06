@@ -20,8 +20,6 @@ public abstract class Entity {
     protected int layer;
     int time = 0;
     protected boolean alive;
-    public float centerX = x + Sprite.SCALED_SIZE / 2;
-    public float centerY = y + Sprite.SCALED_SIZE / 2;
 
     public boolean isAlive() {
         return alive;
