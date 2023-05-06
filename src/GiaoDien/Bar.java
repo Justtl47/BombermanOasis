@@ -11,6 +11,7 @@ public class Bar extends AnchorPane {
     public Label labelTime;
     public Label labelScore;
     public Label labelRemain;
+    public Label labelLife;
 
     public Bar() {
         labelLevel = new Label("Level: ");
@@ -36,10 +37,16 @@ public class Bar extends AnchorPane {
         labelRemain.setLayoutY(5);
         labelRemain.setFont(Font.font(15));
         labelRemain.setTextFill(WHITE);
+
+        labelLife = new Label("Life: ");
+        labelLife.setLayoutX(800);
+        labelLife.setLayoutY(5);
+        labelLife.setFont(Font.font(15));
+        labelLife.setTextFill(WHITE);
     }
 
     public void setBoard() {
-        BombermanGame.board.getChildren().addAll(labelTime, labelLevel, labelScore, labelRemain);
+        BombermanGame.board.getChildren().addAll(labelTime, labelLevel, labelScore, labelRemain, labelLife);
 
     }
     public void setLabelTime(int time) {
@@ -51,6 +58,9 @@ public class Bar extends AnchorPane {
 
     public void setLabelScore(int score) {
         labelScore.setText("Score: " + score);
+    }
+    public void setLabelLife(int life) {
+        labelLife.setText("Life: " + life / 20);
     }
 
     public void setLabelRemain(int remain) {

@@ -24,9 +24,13 @@ public class ExitMenu {
     public static void showExitMenu(Stage stage) {
         stage.close();
 
+        Sound.GameOver.play();
+        Sound.GameOver.loop();
+        Sound.BG.stop();
+
         Label scoreL = new Label("Your Score: " + BombermanGame.score);
 
-        Image image1 = new Image("StartMenu/backViet.jpg");
+        Image image1 = new Image("StartMenu/exitBackground-02.png");
         ImageView background = new ImageView(image1);
 
         Image image2 = new Image("StartMenu/ResizeRestartButton.png");
@@ -38,16 +42,16 @@ public class ExitMenu {
         scoreL.setTextFill(Color.WHITE);
         scoreL.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         scoreL.setLayoutX(270);
-        scoreL.setLayoutY(240);
+        scoreL.setLayoutY(140);
 
-        restart.setScaleX(0.35);
-        restart.setScaleY(0.35);
+        restart.setScaleX(0.2);
+        restart.setScaleY(0.2);
 
-        exit.setScaleX(0.35);
-        exit.setScaleY(0.35);
+        exit.setScaleX(0.2);
+        exit.setScaleY(0.2);
 
-        background.setScaleX(0.25);
-        background.setScaleY(0.25);
+        background.setFitWidth(1481/2);
+        background.setFitHeight(877/2);
 
         //Tạo root chứa 2 ảnh
         AnchorPane root = new AnchorPane();
@@ -71,19 +75,20 @@ public class ExitMenu {
         startStage.setHeight(imageHeight);
 
         // Đặt vị trí mới cho hình ảnh và nút
-        background.setLayoutX(-1120);
-        background.setLayoutY(-690);
+        background.setLayoutX(0);
+        background.setLayoutY(0);
 
-        restart.setLayoutX(-60);
-        restart.setLayoutY(265);
+        restart.setLayoutX(-210);
+        restart.setLayoutY(100);
 
-        exit.setLayoutX(260);
-        exit.setLayoutY(265);
+        exit.setLayoutX(10);
+        exit.setLayoutY(100);
 
         // Show start menu
         startStage.show();
 
         restart.setOnMouseClicked(event -> {
+            Sound.ButtonClick.play();
             Sound.MainMenu.stop();
             Sound.BG.play();
             Sound.BG.loop();
@@ -95,12 +100,13 @@ public class ExitMenu {
             level = 0;
 //            Map.createMap();
             flag = 1;
+            score = 100;
             Collisions.life = 60;
             restartGame = true;
         });
 
-
         exit.setOnMouseClicked(event -> {
+            Sound.ButtonClick.play();
             startStage.close();
         });
     }

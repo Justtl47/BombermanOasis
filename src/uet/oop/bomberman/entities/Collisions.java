@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import GiaoDien.Sound;
 import javafx.stage.Stage;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.StartMenu;
@@ -21,6 +22,7 @@ public class Collisions {
                 life--;
 //                System.out.println(life);
                 bomberman.setAlive(false);
+                score -= 1;
                 break;
 //                ExitMenu.showExitMenu(BombermanGame.stage1);
             }
@@ -36,7 +38,7 @@ public class Collisions {
             for (Enemy enemy : enemies) {
                 Rectangle rectangle3 = enemy.getBounds();
                 if (rectangle.intersects(rectangle3) && bomberman.alive) {
-                    score += 5; // x20 = 100
+                    score += 1;
                     System.out.println("enemy : " + score);
                     enemy.setAlive(false);
                 }
@@ -50,7 +52,7 @@ public class Collisions {
             Rectangle rectangle1 = stillObject.getBounds();
             if (rectangle.intersects(rectangle1)) {
                 if (stillObject instanceof Portal && enemies.size() == 0) {
-                    score += 200;
+                    score += 40;
                     System.out.println("portal : " + score);
                     nextLevel = true;
                 }
@@ -62,13 +64,12 @@ public class Collisions {
                 }
 
                 if (stillObject instanceof Item) {
+                    Sound.EatItem.play();
                     score += 20; // x1 = 20
                     System.out.println("item : " + score);
                     ((Item) stillObject).change();
                     stillObjects.remove(stillObject);
                 }
-
-                //item, portal
                 break;
             }
 
@@ -106,6 +107,7 @@ public class Collisions {
             if (r1.intersects(r4) && enemy.isAlive()) {
                 bomberman.setAlive(false);
                 life -= 20;
+                score -= 20;
                 System.out.println(life);
                 eList.add(enemy);
                 enemy.setAlive(false);

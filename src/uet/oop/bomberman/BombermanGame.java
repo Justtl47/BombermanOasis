@@ -40,6 +40,7 @@ public class BombermanGame extends Application {
     public static List<Bomb> bombList = new ArrayList<>();
     public static List<Flame> flameList = new ArrayList<>();
     public static int score = 100;
+
     public static int time = 0;
     public static int level = 0;
     public static boolean nextLevel = false;
@@ -154,6 +155,7 @@ public class BombermanGame extends Application {
         bar.setLabelTime(time / 120);
         bar.setLabelRemain(enemies.size());
         bar.setLabelScore(score);
+        bar.setLabelLife(life);
         time++;
         enemies.forEach(Enemy::update);
         entities.forEach(Entity::update);

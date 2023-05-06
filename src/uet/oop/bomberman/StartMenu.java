@@ -55,6 +55,7 @@ public class StartMenu {
         startStage.show();
 
         button.setOnMouseClicked(event -> {
+            Sound.ButtonClick.play();
             Sound.MainMenu.stop();
             Sound.BG.play();
             Sound.BG.loop();
