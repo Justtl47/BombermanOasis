@@ -1,5 +1,7 @@
 package uet.oop.bomberman.entities;
 
+import GiaoDien.Sound;
+
 import java.awt.*;
 
 import static uet.oop.bomberman.BombermanGame.*;
@@ -54,6 +56,7 @@ public class Collisions {
                 }
 
                 if (stillObject instanceof Item) {
+                    Sound.Eat.play();
                     score += 50;
                     ((Item) stillObject).change();
                     stillObjects.remove(stillObject);
