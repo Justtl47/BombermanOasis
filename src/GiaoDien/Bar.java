@@ -60,7 +60,7 @@ public class Bar extends AnchorPane {
         labelScore.setText("Score: " + score);
     }
     public void setLabelLife(int life) {
-        labelLife.setText("Life: " + life / 20);
+        labelLife.setText("Life: " + life);
     }
 
     public void setLabelRemain(int remain) {

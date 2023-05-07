@@ -12,33 +12,33 @@ import static uet.oop.bomberman.BombermanGame.*;
 import static uet.oop.bomberman.BombermanGame.bomberman;
 
 public class Collisions {
-    public static int life = 60 ;
+    public static int life = 3 ;
     public static void collisionFlame() {
         for (Flame flame : flameList) {
             Rectangle rectangle = flame.getBounds();
             Rectangle rectangle1 = bomberman.getBounds();
 
-            if (rectangle.intersects(rectangle1)) {
+            if (bomberman.isAlive() && rectangle.intersects(rectangle1)) {
                 life--;
 //                System.out.println(life);
                 bomberman.setAlive(false);
-                score -= 1;
-                break;
+                score -= 20;
+                return;
 //                ExitMenu.showExitMenu(BombermanGame.stage1);
             }
 
 
             for (Entity stillObject : stillObjects) {
                 Rectangle rectangle2 = stillObject.getBounds();
-                if (rectangle.intersects(rectangle2) && (stillObject instanceof Brick)) {
+                if (bomberman.isAlive() && rectangle.intersects(rectangle2) && (stillObject instanceof Brick)) {
                     stillObject.setAlive(false);
                 }
             }
 
             for (Enemy enemy : enemies) {
                 Rectangle rectangle3 = enemy.getBounds();
-                if (rectangle.intersects(rectangle3) && bomberman.alive) {
-                    score += 1;
+                if (bomberman.isAlive() && rectangle.intersects(rectangle3) && enemy.isAlive()) {
+                    score += 50;
                     enemy.setAlive(false);
                 }
             }
@@ -51,7 +51,7 @@ public class Collisions {
             Rectangle rectangle1 = stillObject.getBounds();
             if (rectangle.intersects(rectangle1)) {
                 if (stillObject instanceof Portal && enemies.size() == 0) {
-                    score += 40;
+                    score += 100;
                     nextLevel = true;
                 }
                 if (bomberman.getLayer() >= stillObject.getLayer()) {
@@ -103,7 +103,7 @@ public class Collisions {
             Rectangle r4 = bomberman.getBounds();
             if (r1.intersects(r4) && enemy.isAlive()) {
                 bomberman.setAlive(false);
-                life -= 20;
+                life -= 1;
                 score -= 20;
                 eList.add(enemy);
                 enemy.setAlive(false);

@@ -101,7 +101,7 @@ public class ExitMenu {
 //            Map.createMap();
             flag = 1;
             score = 100;
-            Collisions.life = 60;
+            Collisions.life = 3;
             restartGame = true;
         });
 
